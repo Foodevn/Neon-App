@@ -1,3 +1,6 @@
+//định nghĩa bố cục tổng thể của toàn bộ ứng dụng
+
+//Import các dependencies
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";

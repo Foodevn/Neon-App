@@ -11,6 +11,8 @@ export const SearchInput = () => {
   const [value, setValue] = useState("");
   const debouncedValue = useDebounceValue(value, 500);
 
+  console.log(debouncedValue);
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
@@ -20,13 +22,14 @@ export const SearchInput = () => {
       {
         url: "/",
         query: {
-          search: debouncedValue.toString(),
+          search: debouncedValue[0],
         },
       },
       { skipEmptyString: true, skipNull: true }
     );
     router.push(url);
   }, [debouncedValue, router]);
+
   return (
     <div className="w-full relative">
       <Search className="absolute top-1/2 left-3 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />

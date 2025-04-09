@@ -5,7 +5,7 @@ import "@/app/glowingStar.css";
 
 export const GlowingStarLoading: React.FC = () => {
   return (
-    <div className="glowing-star-container">
+    <div className="glowing-star-container flex items-center justify-center h-screen w-screen bg-blue-950">
       <svg
         className="pl"
         viewBox="0 0 56 56"
