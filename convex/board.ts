@@ -7,7 +7,11 @@ const images = [
   "/placeholders/3.png",
   "/placeholders/4.png",
   "/placeholders/5.png",
-  "/placeholders/6.png",
+  "/placeholders/7.png",
+  "/placeholders/8.png",
+  "/placeholders/9.png",
+  "/placeholders/10.png",
+  "/placeholders/11.png",
 ];
 
 export const create = mutation({
