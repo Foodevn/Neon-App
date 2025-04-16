@@ -59,11 +59,11 @@ export const RenameModal = () => {
             placeholder="Board title"
           />
           <DialogFooter>
-            <DialogClose>
+            {/* <DialogClose>
               <Button type="button" variant="outline">
                 Cancel
               </Button>
-            </DialogClose>
+            </DialogClose> */}
             <Button disabled={pending} type="submit">
               save
             </Button>
