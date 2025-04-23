@@ -22,7 +22,7 @@ export const useRenameModal = create<IRenameModal>((set) => ({
       initialValues: defaultValues,
     });
     // Reload trang sau khi đóng modal
-    window.location.reload();
+    // window.location.reload();
   },
   initialValues: defaultValues,
 }));

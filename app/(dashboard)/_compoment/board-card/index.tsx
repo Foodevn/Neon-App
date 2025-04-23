@@ -1,16 +1,21 @@
 "use client";
 
-import Image from "next/image";
+import { toast } from "sonner";
 import Link from "next/link";
+import Image from "next/image";
 import { useAuth } from "@clerk/nextjs";
 import { MoreHorizontal } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 
-import { Skeleton } from "@/components/ui/skeleton";
-
-import { Overlay } from "./overlay";
-import { Footer } from "./footer";
+import { api } from "@/convex/_generated/api";
 import { Actions } from "@/components/actions";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useApiMutation } from "@/hooks/use-api-mutation";
+
+import { Footer } from "./footer";
+import { Overlay } from "./overlay";
+import { useRenameModal } from "@/store/use-rename-modal";
+import { useRef } from "react";
 
 interface BoardCardProps {
   id: string;
@@ -33,15 +38,41 @@ export const BoardCard = ({
   orgId,
   isFavorite,
 }: BoardCardProps) => {
+  const { onOpen } = useRenameModal();
+  const handleRenameClick = () => {
+    // setDropdownOpen(false); // Đóng DropdownMenu
+    onOpen("j573raxgsqd5dyw00mfcsgx9t97e1j8d", "111111212"); // Mở RenameModal
+  };
   const { userId } = useAuth();
   const authorLabel = userId === authorId ? "You" : authorName;
   const createdAtLabel = formatDistanceToNow(createdAt, { addSuffix: true });
+
+  const { mutate: onFavorite, pending: pendingFavorite } = useApiMutation(
+    api.board.favorite
+  );
+  const { mutate: onUnfavorite, pending: pendingUnfavorite } = useApiMutation(
+    api.board.unfavorite
+  );
+
+  const toggleFavorite = () => {
+    if (isFavorite) {
+      onUnfavorite({ id })
+        .then(() => toast.success("Unfavorite"))
+        .catch(() => toast.error("Failed to Unfavorite"));
+    } else {
+      onFavorite({ id, orgId })
+        .then(() => toast.success("Favorite"))
+        .catch(() => toast.error("Failed to Favorite"));
+    }
+  };
+
   return (
     // <Link href={`/board/${id}`}>
     <div className="group aspect-[100/127] border rounded-lg flex flex-col justify-between overflow-hidden">
       <div className="relative flex-1 bg-amber-50">
         <Image src={imageUrl} alt={title} fill className="object-fit" />
         <Overlay />
+
         <Actions id={id} title={title} side="right">
           <button
             title="Action"
@@ -62,9 +93,14 @@ export const BoardCard = ({
         title={title}
         authorLabel={authorLabel}
         createdAtLabel={createdAtLabel}
-        onClick={() => {}}
-        disabled={false}
+        onClick={toggleFavorite}
+        disabled={pendingFavorite || pendingUnfavorite}
       />
+      <div>
+        <button title="test" onClick={handleRenameClick}>
+          hâhaah
+        </button>
+      </div>
     </div>
     // </Link>
   );
