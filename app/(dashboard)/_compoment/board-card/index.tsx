@@ -1,7 +1,6 @@
 "use client";
 
 import {toast} from "sonner";
-import Link from "next/link";
 import Image from "next/image";
 import {useAuth} from "@clerk/nextjs";
 import {MoreHorizontal} from "lucide-react";
@@ -14,8 +13,7 @@ import {useApiMutation} from "@/hooks/use-api-mutation";
 
 import {Footer} from "./footer";
 import {Overlay} from "./overlay";
-import {useRenameModal} from "@/store/use-rename-modal";
-import {useRef} from "react";
+
 
 interface BoardCardProps {
     id: string;
@@ -38,21 +36,19 @@ export const BoardCard = ({
                               orgId,
                               isFavorite,
                           }: BoardCardProps) => {
-    const {onOpen} = useRenameModal();
-    const handleRenameClick = () => {
-        // setDropdownOpen(false); // Đóng DropdownMenu
-        onOpen("j573raxgsqd5dyw00mfcsgx9t97e1j8d", "111111212"); // Mở RenameModal
-    };
+
+
     const {userId} = useAuth();
     const authorLabel = userId === authorId ? "You" : authorName;
     const createdAtLabel = formatDistanceToNow(createdAt, {addSuffix: true});
-
-    const {mutate: onFavorite, pending: pendingFavorite} = useApiMutation(
-        api.board.favorite
-    );
-    const {mutate: onUnfavorite, pending: pendingUnfavorite} = useApiMutation(
-        api.board.unfavorite
-    );
+    const {
+        mutate: onFavorite,
+        pending: pendingFavorite
+    } = useApiMutation(api.board.favorite);
+    const {
+        mutate: onUnfavorite,
+        pending: pendingUnfavorite
+    } = useApiMutation(api.board.unfavorite);
 
     const toggleFavorite = () => {
         if (isFavorite) {
