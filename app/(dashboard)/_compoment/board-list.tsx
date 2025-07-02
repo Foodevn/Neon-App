@@ -31,10 +31,7 @@ export const BoradList = ({ orgId, query }: BoardListProps) => {
         >
           <NewBoardButton orgId={orgId} disabled />
           <BoardCard.Skeleton />
-          <BoardCard.Skeleton />
-          <BoardCard.Skeleton />
-          <BoardCard.Skeleton />
-          <BoardCard.Skeleton />
+
         </div>
       </div>
     );
