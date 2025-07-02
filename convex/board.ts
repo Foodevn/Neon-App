@@ -39,13 +39,27 @@ export const create = mutation({
 
 export const remove = mutation({
     args: {id: v.id("boards")},
-    handler: async (ctx, arags) => {
+    handler: async (ctx, args) => {
         const indentity = await ctx.auth.getUserIdentity();
         if (!indentity) {
             throw new Error("Unautorized");
         }
-        // todo: later check to delete favorite relation as well
-        await ctx.db.delete(arags.id);
+        const userID = indentity.subject;
+
+        // khi xoa 1 board kiem tra xem trong ban favorite con board do khong va xoa luon favorite
+        const existingFavorite = await ctx.db
+            .query("userFavorites")
+            .withIndex("by_user_board", (q) =>
+                q
+                    .eq("userId", userID)
+                    .eq("boardId", args.id)
+            )
+            .unique();
+        if (existingFavorite) {
+            await ctx.db.delete(existingFavorite._id);
+        }
+
+        await ctx.db.delete(args.id);
     },
 });
 export const update = mutation({
@@ -89,10 +103,10 @@ export const favorite = mutation({
 
         const existingFavorite = await ctx.db
             .query("userFavorites")
-            .withIndex("by_user_board_org", (q) =>
-                q.eq("userId", userId)
+            .withIndex("by_user_board", (q) =>
+                q
+                    .eq("userId", userId)
                     .eq("boardId", board._id)
-                    .eq("orgId", args.orgId)
             )
             .unique();
         if (existingFavorite) {
@@ -130,7 +144,6 @@ export const unfavorite = mutation({
                 (q) =>
                     q.eq("userId", userId)
                         .eq("boardId", board._id)
-                //TODO: check if orgID needed
             )
             .unique();
 
