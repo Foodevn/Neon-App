@@ -13,3 +13,9 @@ https://dashboard.convex.dev/t/foodfix/realtime-miro/polite-seal-867/data?table=
 ## Clerk (Login)
 
 https://dashboard.clerk.com/apps/app_2ukodvkLaAMTKkKm8VUkcjCcZaM/instances/ins_2ukodydmaDsArpWfatEPgy1uOfF
+
+## LiveBlocks
+
+https://liveblocks.io/dashboard/_BNCfmkw49Se9Lx5XxLT8
+
+
