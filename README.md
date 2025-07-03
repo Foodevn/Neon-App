@@ -16,6 +16,12 @@ https://dashboard.clerk.com/apps/app_2ukodvkLaAMTKkKm8VUkcjCcZaM/instances/ins_2
 
 ## LiveBlocks
 
+npm i @liveblocks/client
+
+npm i @liveblocks/react
+
+npx create-liveblocks-app@1.9.7 --init --framework react
+
 https://liveblocks.io/dashboard/_BNCfmkw49Se9Lx5XxLT8
 
 
