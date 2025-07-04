@@ -3,18 +3,16 @@ import {Canvas} from "@/app/board/[boardId]/_component/canvas";
 import {Loading} from "@/app/board/[boardId]/_component/loading";
 
 interface BoardIdPageProps {
-    params: {
-        boardId: string;
-    };
+    params: Promise<{ boardId: string }>; // Type params như Promise
 }
 
-const BoardIdPage = ({params}: BoardIdPageProps) => {
+export default async function BoardIdPage({params}: BoardIdPageProps) {
+    const resolvedParams = await params; // Await params
+    const {boardId} = resolvedParams;
+
     return (
-        <Room roomId={params.boardId} fallback={<Loading/>}>
-
-            <Canvas boardId={params.boardId}/>
+        <Room roomId={boardId} fallback={<Loading/>}>
+            <Canvas boardId={boardId}/>
         </Room>
-    )
+    );
 }
-
-export default BoardIdPage;

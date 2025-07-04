@@ -22,6 +22,9 @@ npm i @liveblocks/react
 
 npx create-liveblocks-app@1.9.7 --init --framework react
 
+npx i @liveblocks/node
+
 https://liveblocks.io/dashboard/_BNCfmkw49Se9Lx5XxLT8
 
+npx shadcn-ui@latest add avatar
 
