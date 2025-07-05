@@ -1,16 +1,17 @@
 "use client";
 import {nanoid} from "nanoid";
-import {Info} from "@/app/board/[boardId]/_component/info";
-import {Toolbar} from "@/app/board/[boardId]/_component/toolbar";
-import {Participants} from "@/app/board/[boardId]/_component/participants";
-
 import {useCanRedo, useCanUndo, useHistory, useMutation, useOthersMapped, useStorage} from "@/liveblocks.config";
 import {Camera, CanvasMode, CanvasState, Color, LayerType, Point} from "@/types/canvas";
 import {useCallback, useMemo, useState} from "react";
-import {CursorsPresence} from "@/app/board/[boardId]/_component/cursors-presence";
 import {connectionIdToColor, pointerEventToCanvasPoint} from "@/lib/utils";
 import {LiveObject} from "@liveblocks/client";
+
+import {Info} from "@/app/board/[boardId]/_component/info";
+import {Toolbar} from "@/app/board/[boardId]/_component/toolbar";
+import {Participants} from "@/app/board/[boardId]/_component/participants";
 import {LayerPreview} from "@/app/board/[boardId]/_component/layer-preview";
+import {CursorsPresence} from "@/app/board/[boardId]/_component/cursors-presence";
+import {SelectionBox} from "@/app/board/[boardId]/_component/selection-box";
 
 const MAX_LAYERS = 100;
 
@@ -186,6 +187,11 @@ export const Canvas = ({boardId}:CanvasProps) => {
                             />
                         )
                     )}
+
+                    <SelectionBox
+                        onResizeHandlePointerDown={() => {
+                        }}
+                    />
                     <CursorsPresence/>
                 </g>
             </svg>
