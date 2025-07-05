@@ -64,10 +64,10 @@ export const Toolbar = ({
                     icon={Square}
                     onClick={() => setCanvasState({
                         mode: CanvasMode.Inserting,
-                        layerType: LayerType.Retangle,
+                        layerType: LayerType.Rectangle,
                     })}
                     isActive={canvasState.mode === CanvasMode.Inserting&&
-                        canvasState.layerType === LayerType.Retangle}
+                        canvasState.layerType === LayerType.Rectangle}
                 />
                 <ToolButton
                     label="Ellipse"
