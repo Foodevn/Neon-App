@@ -12,6 +12,7 @@ import {Participants} from "@/app/board/[boardId]/_component/participants";
 import {LayerPreview} from "@/app/board/[boardId]/_component/layer-preview";
 import {CursorsPresence} from "@/app/board/[boardId]/_component/cursors-presence";
 import {SelectionBox} from "@/app/board/[boardId]/_component/selection-box";
+import {SelectionTools} from "@/app/board/[boardId]/_component/selection-tool";
 
 const MAX_LAYERS = 100;
 
@@ -263,7 +264,10 @@ export const Canvas = ({boardId}:CanvasProps) => {
                 canRedo={canRedo}
                 undo={history.undo}
                 redo={history.redo}/>
-
+            <SelectionTools
+                camera={camera}
+                setLastUsedColor={setLastUsedColor}
+            />
             <svg
                 className={"h-[100vh] w-[100vw]"}
                 onWheel={onWheel}
