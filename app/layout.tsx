@@ -1,12 +1,15 @@
 //định nghĩa bố cục tổng thể của toàn bộ ứng dụng
 
 //Import các dependencies
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import type {Metadata} from "next";
+import {Inter} from "next/font/google";
 import "./globals.css";
-import { ConvexClientProvider } from "@/providers/convex-client-provides";
-import { Toaster } from "@/components/ui/sonner";
-import { ModalProvider } from "@/providers/modal-provider";
+import {ConvexClientProvider} from "@/providers/convex-client-provides";
+import {Toaster} from "@/components/ui/sonner";
+import {ModalProvider} from "@/providers/modal-provider";
+import {Suspense} from "react";
+import {Loading} from "@components/Auth/loading";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -22,11 +25,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+      <Suspense fallback={<Loading/>}>
         <ConvexClientProvider>
           {children}
           <Toaster />
           <ModalProvider />
         </ConvexClientProvider>
+      </Suspense>
       </body>
     </html>
   );
