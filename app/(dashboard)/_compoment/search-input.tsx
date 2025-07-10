@@ -11,8 +11,6 @@ export const SearchInput = () => {
   const [value, setValue] = useState("");
   const debouncedValue = useDebounceValue(value, 500);
 
-  console.log(debouncedValue);
-
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
