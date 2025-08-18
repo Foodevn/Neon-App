@@ -88,7 +88,7 @@ npm run dev
 npx convex dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to see your application!
+Open [https://realtime.hphucdev.id.vn/](https://realtime.hphucdev.id.vn/) to see your application!
 
 ## 🎯 Usage
 
